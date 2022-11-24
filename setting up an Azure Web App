@@ -1,0 +1,31 @@
+
+az appservice plan create 
+   --name qlabsplan \
+   --resource-group qlabs-rg \
+   --location $location
+
+az webapp create 
+   --name $appName \
+   --plan qlabsplan \
+   --resource-group qlabs-rg \
+  
+   redis = ($(az redis create
+     --name $appName \
+     --resource-group qlabs-rg \
+     --location $location \
+     --vm-size CO \ 
+     --sku Basic \
+     --query [hostName,sslPort] \
+     --output tsv))
+   
+   key = $(az redis list-keys
+     --name $appName \
+     --resource-group qlabs-rg \
+     --query primaryKey \
+     --output tsv)
+
+az webapp config appsettings set
+   --name $appName \
+   --resource-group qlabs-rg \
+   --settings "REDIS_URL=${redis[0]}" "REDIS_PORT=${redis[1]}" "REDIS_KEY=$key"
+   
