@@ -1,0 +1,23 @@
+{Visual Studio Code}
+
+// CREATE WEB PROJECT
+
+dotnet new webapi -o TodoApi
+cd TodoApi
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+code -r ../TodoApi
+
+
+// TEST THE PROJECT 
+// The project template creates a WeatherForecast API with support for Swagger.
+
+dotnet dev-certs https --trust
+
+Run the app:
+
+Press Ctrl+F5 to run the app.
+Visual Studio Code launches the default browser to https://localhost:<port>, 
+where <port> is the randomly chosen port number displayed in the output. 
+There is no endpoint at https://localhost:<port> so the browser returns 
+HTTP 404 Not Found. Append /swagger to the URL, https://localhost:<port>
+/swagger.
