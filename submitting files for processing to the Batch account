@@ -23,3 +23,4 @@ foreach (string filePath in qlabinputFilePaths)
      (qlabBatchAccountUrl, qlabBatchAccountName, qlabBatchAccountKey);
 
 using (BatchClient qlabbatchClient = BatchClient.Open(qlabcred))
+
