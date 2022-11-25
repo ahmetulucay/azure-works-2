@@ -1,0 +1,25 @@
+
+CloudBlobClient qlabblobClient = qlabstorageAccount.CreateCloudBlobClient();
+List<string> qlabinputFilePaths = new List<string>
+
+{
+   "dataset1.txt",
+   "dataset2.txt",
+   "dataset3.txt"
+
+};
+
+List<ResourceFile> qlabinputFiles = new List<ResourceFile>();
+
+foreach (string filePath in qlabinputFilePaths)
+
+{
+
+   qlabinputFiles.Add(UploadFileToContainer(qlabblobClient, qlabContainerName, filePath));
+
+}
+
+   BatchSharedKeyCredentials cred = new BatchSharedKeyCredentials
+     (qlabBatchAccountUrl, qlabBatchAccountName, qlabBatchAccountKey);
+
+using (BatchClient qlabbatchClient = BatchClient.Open(qlabcred))
