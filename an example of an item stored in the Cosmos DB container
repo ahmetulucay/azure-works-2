@@ -1,0 +1,20 @@
+
+// An example of an item stored in the Cosmos DB container is shown below
+
+{
+   "id":"1",
+   "Name":"NameA",
+   
+   "orders":[{
+      "course":"Big Data",
+      "price":"3.33"
+   }],
+   
+   "ratings":{"3":"100", "4":"200", "5":"300"}
+}
+
+
+
+// Formulation of a query that would be used to get all items where the order price is $3.33=
+
+   select * from c IN customer.orders WHERE c.price = "3.33"
