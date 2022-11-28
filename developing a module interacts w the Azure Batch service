@@ -1,0 +1,13 @@
+
+public static async Task qlabBatchManagement(string pResouceGroup, string pAccountName)
+{
+    await batchManagementClient.Account.CreateAsync(pResouceGroup, pAccountName,
+    new BatchAccountCreateParameters(){Location = "West US"});
+    
+    BatchAccountListKeyResult qlabaccountKeys =
+    await batchManagementClient.Account.ListKeysAsync(pResouceGroup, pAccountName);
+    
+    Console.WriteLine("Primary key: {0}", qlabaccountKeys.Primary);
+    Console.WriteLine("Secondary key: {0}", qlabaccountKeys.Secondary);
+    
+}
