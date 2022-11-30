@@ -1,0 +1,20 @@
+{
+  "bindings": 
+  [
+    {
+      "type": "queueTrigger",
+      "direction": "in",
+      "name": "qcustomq",
+      "queueName": "qcustomqueue",
+      "connection": "MY_STORAGE_ACCT_APP_SETTING"
+    },
+    
+    {
+      "type": "table",
+      "direction": out,
+      "name": "$qreturn",
+      "queueName": "qreturnqueue",
+      "connection": "MY_TABLE_STORAGE_ACCT_APP_SETTING"
+    }  
+  ]
+}
