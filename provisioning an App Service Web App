@@ -1,0 +1,26 @@
+[CLI]
+
+1. #/bin/bash
+appName = QKaffePublicWeb$random
+location= WestUS
+dockerHubContainerPath = QKaffe/publicweb.v1
+fqdn = www.qkaffe.com
+
+2. az webapp create
+–name $appName
+–plan AppServiceLinuxDockerPlan
+–resource-group
+qKaffePublicWebResourceGroup
+
+3. az webapp config container set
+–docker-custom-image-name
+$dockerHubContainerPath
+–name $appName
+–resource-group
+qKaffePublicWebResourceGroup
+
+4. az webapp config hostname add
+–webapp-name $appName
+–resource-group
+qKaffePublicWebResourceGroup \
+–hostname $fqdn
