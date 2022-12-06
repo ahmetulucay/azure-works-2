@@ -1,0 +1,19 @@
+
+stataic void ReceiveMessageAndSendNotification(string connectionString)
+{
+    string qlabshubConnectionString = CloudConfigurationManager.GetSetting
+    ("Microsoft.NotificationHub.ConnectionString");
+    
+    NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString
+    (qlabshubConnectionString, "enterprisepushservicehub");
+    
+    BrokeredMessage message = Client.Receive();
+    var toastMessage = @"<toast><visual><binding template=""ToastText01""><text id=""1"">
+    {messagepayload}</text></binding></visual></toast>";
+    SendNotificationAsync(toastMessage);
+}
+
+static async void SendNotificationAsync(string message)
+{
+    await hub.SendWindowsNativeNotificationAsync(message);
+}
