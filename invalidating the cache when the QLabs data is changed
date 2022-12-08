@@ -1,0 +1,16 @@
+------------------------------
+
+void clearQLabsCache(string p_QLabs)
+
+{
+  //Establish the cache connection (Using IDatabase interface and GetDatabase() method)=
+
+    IDatabase cache=Connection.GetDatabase();
+
+
+  //Invalidate the cache =
+
+    cache.KeyDelete(p_QLabs);
+}
+
+------------------------------
