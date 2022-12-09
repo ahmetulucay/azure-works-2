@@ -1,0 +1,16 @@
+
+
+# creating VM (Azure CLI)
+
+az group create \
+   --name qlabgroup \
+   --location westus 
+   
+   
+az vm create \
+   --resource-group glabgroup \
+   --name qlabvm \
+   --image q2020datacenter \
+   --admin-username qlabsr \
+   --admin-password Qlabsr001vm
+
