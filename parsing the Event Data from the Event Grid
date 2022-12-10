@@ -1,0 +1,17 @@
+# a class that will be used to parse the Event Data from the Event Grid.
+
+public class LoginEvent
+{
+   public string id {get; set;}
+   public string topic {get; set;}
+   public string eventType {get; set;}
+   
+   public string subject {get; set;}
+   public DateTime eventTime {get; set;}
+   public Dictionary<string, string> data {get; set;}
+   
+   public string Serialized()
+   {
+      return JsonConvert.SerializeObject(this);
+   }
+}
