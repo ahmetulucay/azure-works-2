@@ -1,0 +1,23 @@
+# Creating an Azure Function that reads messages from a queue (queueName: "qlabqueue")
+and writes the subsequent data read from the messages to Azure Table storage.
+
+[JSON]
+
+{
+  "bindings": [
+    {
+      "type": "queueTrigger",
+      "direction": "in",
+      "name": "qlabq",
+      "queueName": "qlabqueue",
+      "connection": "STORAGE_APP_SETTING"
+    },
+    {
+      "type": "table",
+      "direction": "out",
+      "name": "$return",
+      "tableName": "qlabcustomer",
+      "connection": "TABLE_STORAGE_APP_SETTING"
+    }
+  ]
+}
