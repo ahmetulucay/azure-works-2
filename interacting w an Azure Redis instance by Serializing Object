@@ -1,0 +1,22 @@
+[C#]
+
+class TechUser
+{
+   public strig Id {set; get;}
+   public strig Name {set; get;}
+   public int TlfNo {set; get;}
+   
+   public User(string UserId, string Name, string TlfNo)
+   {
+      this.Id = UserId;
+      this.Name = Name;
+      this.TlfNo = TlfNo;
+   }
+}
+
+// Store .NET object to cache
+TechUser obj = new TechUser("1", "Jack Dylan", 001234443232);
+Console.WriteLine("Cache response from storing TechUser .NET object: " + cache.StringSet("e1", JsonConvert.SerializeObject(obj)));
+
+// Retrieve object from cache
+TechUser e1FromCache = JsonConvert.DeserializeObject<TechUser>(cache.StringGet("e1"));
