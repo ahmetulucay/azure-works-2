@@ -1,0 +1,24 @@
+# Composite index defining (firstname asc, lastname desc):
+
+{  
+        "automatic":true,
+        "indexingMode":"Consistent",
+        "includedPaths":[  
+            {  
+                "path":"/*"
+            }
+        ],
+        "excludedPaths":[],
+        "compositeIndexes":[  
+            [  
+                {  
+                    "path":"/firstname",
+                    "order":"ascending"
+                },
+                {  
+                    "path":"/lastname",
+                    "order":"descending"
+                }
+            ]
+        ]
+    }
