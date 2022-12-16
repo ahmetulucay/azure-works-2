@@ -1,5 +1,15 @@
 # Composite index defining (firstname asc, lastname desc):
 
+[JSON]
+
+{
+    [firstname] : "Jack",
+    [lastname]  : "White"
+}
+
+
+// Defining policy
+
 {  
         "automatic":true,
         "indexingMode":"Consistent",
@@ -22,3 +32,12 @@
             ]
         ]
     }
+
+[SQL]
+// Query :
+
+SELECT *
+    FROM c
+    ORDER BY c.firstname ASC, c.lastname DESC    
+    
+*****
