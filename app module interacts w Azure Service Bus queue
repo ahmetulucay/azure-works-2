@@ -1,0 +1,29 @@
+[C#]
+
+const string ServiceBusConnectionString = "<connection_string>";
+const string QueueName = "<queue_name>"
+static IQueueClient queueClient;
+public static async Task Main(string[] args)
+{
+   const int numberOfMessages = 10;
+   queueClient = new ServiceBusClient(ServiceBusConnectionString, QueueName);
+   await SendMessagesAsync(numberOfMessages);
+   await queueClient.CloseAsnyc();
+}
+
+static async Task SendMessagesAsync(int numberOfMessagesToSend)
+{
+   try
+   { 
+      for (var i = 0; i < numberOfMessagesToSend; i++)
+      {
+         string messageBody = $"Message {i}";
+         var message = new Message(Encoding.UTF8.GetBytes(messageBody));
+         await queueClient.SendAsync(message);
+      }
+   }
+   catch (Exception exception)
+   {
+      Console.WriteLine($"{DateTime.Now} :: Exception : {exception.Message}");
+   }
+}
