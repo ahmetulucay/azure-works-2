@@ -1,0 +1,22 @@
+
+class User
+{
+
+   [System.ComponentModel.DataAnnotations.Key]
+   [IsFilterable]
+   
+   public string LibraryId { get; set;}
+   [IsSearchable]
+   
+   public string Name { get; set;}
+   [IsSearchable,Required]
+   
+   public string Description { get; set;}
+   [IsSearchable,IsFilterable]
+   
+   public string Location { get; set;}
+   [IsSearchable,IsFilterable]
+   
+   public double Rating { get; set;}
+   
+}
