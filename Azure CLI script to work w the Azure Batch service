@@ -1,0 +1,24 @@
+[AZURE CLI]
+
+az batch pool create \
+   --id qlabspool \
+   --vm-size Standard_A1_v2 \
+   --target-dedicated-nodes 2 \
+   --image canonical:ubuntuserver:16.04-LTS \
+   --node-agent-sku-id "batch.node.ubuntu 16.04" 
+
+az batch job create \
+   --id qlabspool \
+   --pool-id qlabspool
+
+for i in {1..number_of_jobs}
+do
+
+az batch task create \
+   --task-id qlabstask$i \
+   --job-id qlabsjob \
+   --command-line "..."
+   
+
+
+
