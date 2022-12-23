@@ -1,0 +1,18 @@
+{
+   "kty": "RSA",
+   key_size: 3072,
+   key_ops:[
+      "encrypt",
+      "decrypt",
+      "sign",
+      "verify",
+      "wrapKey",
+      "unwrapKey"
+   ],
+   "attributes":{},
+   "tags": 
+   {
+     "purpose": "For Testing",
+     "test name": "Test"
+   }
+}
