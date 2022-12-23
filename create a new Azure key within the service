@@ -1,7 +1,7 @@
 {
    "kty": "RSA",
-   key_size: 3072,
-   key_ops:[
+   "key_size": 3072,
+   "key_ops":[
       "encrypt",
       "decrypt",
       "sign",
