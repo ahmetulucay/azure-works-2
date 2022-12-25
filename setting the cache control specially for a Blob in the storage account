@@ -1,0 +1,21 @@
+class Program
+{
+   const string qlabconnectionString = "...";
+   static void Main()
+   {
+      CloudStorageAccount qlabstorageAccount =
+      CloudStorageAccount.Parse(qlabconnectionString);
+      
+      CloudBlobClient qlabblobClient =
+      qlabstorageAccount.CreateCloudBlobClient();
+      
+      CloudBlobContainer qlabcontainer =
+      qlabblobClient.GetContainerReference("production");
+      
+      CloudBlob blobreference =
+      qlabcontaienr.GetBlobReference(pBlobname);
+      
+      blobreference.Properties.Cachecontrol = "max-age=3600";
+      blobreference.SetProperties;
+   }
+}
