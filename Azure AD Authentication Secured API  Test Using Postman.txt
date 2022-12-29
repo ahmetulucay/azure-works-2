@@ -8,7 +8,7 @@ Link:> [https://www.youtube.com/watch?v=y8KzO3htIgs&ab_channel=SharpProgrammer]
 ------------------------------------
 STEPS=
 
-1.Register an API app iz Azure AD
+1.Register an API app in Azure AD
 2.Expose API scopes
 3.Register Postman Client App in Azure AD
 4.Configure Client App permissions
