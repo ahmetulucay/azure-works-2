@@ -1,0 +1,16 @@
+
+CloudStorageAccount storageAccount = CloudStorageAccount.Parse
+   (CloudConfigurationManager.GetSetting("StorageConnectionString"));
+   
+CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+
+CloudQueue queue = queueClient.GetQueueReference("applicationqueue");
+await queue.CreateIfNotExistsAsync();
+
+CloudQueueMessage peekedMessage = await queue.PeekMessageAsync();
+if (peekedMessage != null)
+{
+   Console.WriteLine("The peeked message is: {0}", peekedMessage.AsString);
+}
+
+CloudQueueMessage message = await queue.GetMessageAsync();
