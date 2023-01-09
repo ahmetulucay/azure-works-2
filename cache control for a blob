@@ -1,0 +1,18 @@
+class Program
+{
+   const string mConnectionString = "...";
+   
+   static void Main()
+   {
+      CloudStorageAccount mStorageAccount = CloudStorageAccount.Parse(mConnectionString);
+      
+      CloudBlobClient mblobClient = mstorageAccount.CreateCloudBlobClient();
+      
+      CloudBlobContainer mcontainer = mblobClient.GetContainerReference("production");
+      
+      CloudBlob blobreference = mcontainer.GetBlobReference(pBlobname);
+      
+      blobreference.Properties.Cachecontrol = "max-age=3600";
+      blobreference.SetProperties;
+   }
+}
