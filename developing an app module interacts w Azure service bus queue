@@ -3,9 +3,12 @@
 const string qipServiceBusConnectionString = "..";
 const string QueueName = "qipqueue";
 static IQueueClient qipqueueClient;
+
 static async Task SideSync()
 {
    qipqueueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+   
+   // Send messages..
    await SendMessagesAsync(numberOfMessages);
    await queueClient.CloseAsync();
 }
@@ -15,10 +18,12 @@ static async Task SendMessagesAsync(string messageBody)
    try
    {
       var message = new Message(Encoding.UTF8.GetBytes(messageBody));
-      await queueClient......(message);
+      
+      // Send message to the queue..
+      await queueClient.SendAsync(message);
    }
-   catch(Exception qipexception)
+   catch(Exception exception)
    {
-      Console.WriteLine($"{DateTime.Now} :: Exception:{qipexception.Message}");
+      Console.WriteLine($"{DateTime.Now} :: Exception: {exception.Message}");
    }
 }
