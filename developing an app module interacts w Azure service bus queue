@@ -1,0 +1,24 @@
+#
+
+const string qipServiceBusConnectionString = "..";
+const string QueueName = "qipqueue";
+static IQueueClient qipqueueClient;
+static async Task SideSync()
+{
+   qipqueueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+   await SendMessagesAsync(numberOfMessages);
+   await queueClient.CloseAsync();
+}
+
+static async Task SendMessagesAsync(string messageBody)
+{
+   try
+   {
+      var message = new Message(Encoding.UTF8.GetBytes(messageBody));
+      await queueClient......(message);
+   }
+   catch(Exception qipexception)
+   {
+      Console.WriteLine($"{DateTime.Now} :: Exception:{qipexception.Message}");
+   }
+}
