@@ -1,17 +1,14 @@
 ------------------------------------
-Azure AD Authentication Secured API | Test Using Postman=
-------------------------------------
-
-Link:> [https://www.youtube.com/watch?v=y8KzO3htIgs&ab_channel=SharpProgrammer]
-
-
+Azure Active Directory Authentication Secured API (Test by using Postman)=
 ------------------------------------
 STEPS=
 
-1.Register an API app in Azure AD
-2.Expose API scopes
-3.Register Postman Client App in Azure AD
-4.Configure Client App permissions
-5.Configure Postman Authentication
-6.Run API and test using Postman
+1.Register an API application in Azure Active Directory.
+2.Expose API scopes.
+3.Register Postman Client application in Azure Active Directory.
+4.Configure Client application permissions.
+5.Configure Postman Authentication.
+6.Run API and test it using Postman.
+------------------------------------
+Link:> [https://www.youtube.com/watch?v=y8KzO3htIgs&ab_channel=SharpProgrammer]
 ------------------------------------
