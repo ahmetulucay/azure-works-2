@@ -1,0 +1,12 @@
+
+[FunctionName("QlabFunction")]
+public static async Task Run(OrchestrationTrigger DurableOrchestrationContext context)
+{
+   DateTime qlabdelay = 
+   
+        context.CurrentUtcDateTime.Add(TimeSpan.FromDays(1));
+        
+        await context.CreateTimer(qlabdelay, CancellationToke.None);
+        
+        await context.CallActivityAsync("QlabActivity");
+}
