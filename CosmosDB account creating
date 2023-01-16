@@ -1,0 +1,9 @@
+[Azure CLI]
+
+az cosmosdb create \
+   --resource-group "qlabs-rg" \
+   --name "qlabs-cosmosdb" \
+   --kind GlobalDocumentDB \
+   --locations "South Central US"=0 "North Central"=1 \
+   --default-consistency-level Strong\
+
