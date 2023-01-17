@@ -1,0 +1,9 @@
+
+# Copying data from the current Azure Blob storage account to the new storage account
+# between the storage servers:
+
+1. Export a Resource Manager template.
+2. Modify the template by changing the storage account name and region.
+3. Create a new template deployment.
+4. Deploy the template to create a new storage account in the target region.
+5. Use AZCopy to copy the data to the new storage account.
