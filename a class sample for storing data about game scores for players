@@ -1,0 +1,37 @@
+class PlayerScore : TableEntity
+{
+    public PlayerScore(){}
+    public PlayerScore(string p_GameID, string p_PlayerID, int p_score, long p_timeplayed)
+    {
+      this.PartitionKey = p_GameID;
+      this.RowKey = p_PlayerID;
+      this.score = p_score;
+      this.Timeplayed = p_timeplayed;
+    }
+    public int score {get; set;}
+    public long Timeplayed {get; set;}
+}
+
+private static void Query()
+{
+    CloudStorageAccount qlabs_storage = 
+                CloudStorageAccount.Parse(conn_string);
+    CloudTableClient qlabs_table_client = 
+                qlabs_storage.CreateCloudTableClient();
+    CloudTable qlabs_table = 
+                qlabs_table_client.GetTableReference("Player");
+    
+    TableQuery<DynamicTableEntity> query = new TableQuery<DynamicTableEntity>()
+                .Select(new string [] { "score" }).Where(TableQuery
+                .GenerateFilterConditionForInt("score", QueryComparisons
+                .GreaterThanOrEqual, 2000)).Take(5);
+    EntityResolver<KeyValuePair<string, int?>> resolver =
+                (partitionKey, rowKey, ts, props, etag) => 
+                new KeyValuePair<string, int?>(rowKey, props["score"].Int32Value);
+    
+    foreach(var scoreItem in qlabs_table.ExecuteQuery(query, resolver, null, null))
+    {
+       Console.WriteLine(scoreItem.Key);
+       Console.WriteLine(scoreItem.Value);
+    }
+}
