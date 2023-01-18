@@ -1,7 +1,7 @@
-class PlayerScore : TableEntity
+class GameScore : TableEntity
 {
-    public PlayerScore(){}
-    public PlayerScore(string p_GameID, string p_PlayerID, int p_score, long p_timeplayed)
+    public GameScore(){}
+    public GameScore(string p_GameID, string p_PlayerID, int p_score, long p_timeplayed)
     {
       this.PartitionKey = p_GameID;
       this.RowKey = p_PlayerID;
@@ -24,7 +24,7 @@ private static void Query()
     TableQuery<DynamicTableEntity> query = new TableQuery<DynamicTableEntity>()
                 .Select(new string [] { "score" }).Where(TableQuery
                 .GenerateFilterConditionForInt("score", QueryComparisons
-                .GreaterThanOrEqual, 2000)).Take(5);
+                .GreaterThanOrEqual, 4000)).Take(10);
     EntityResolver<KeyValuePair<string, int?>> resolver =
                 (partitionKey, rowKey, ts, props, etag) => 
                 new KeyValuePair<string, int?>(rowKey, props["score"].Int32Value);
