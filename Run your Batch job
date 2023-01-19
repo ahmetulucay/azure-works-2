@@ -1,0 +1,42 @@
+[Azure CLI]
+
+// Create a resource group
+   az group create \
+     --name MyBatch-rg --location northeurope
+    
+// Create a storage account
+   az storage account create \
+     --resource-group MyBatch-rg \
+     --name mystorage --location northeurope --sku Standard_ZRS
+
+// Create a Batch account
+   az batch account create \
+    --name mybatch --storage-account mystorage \
+    --resource-group MyBatch-rg --location northeurope
+    
+// Authenticate with Batch
+   az batch account login \
+    --name mybatch --resource-group MyBatch-rg --shared-key-auth
+    
+// Create a sample pool of Linux compute noods
+   az batch pool create \
+    --id mypool --vm-size Standard_A1_v2 --target-dedicated-nodes 2 \
+    --image canonical:ubuntuserver:20.04-LTS --node-agent-sku-id "batch.node.ubuntu 20.04"
+    
+// See the status of the pool
+   az batch pool show --pool-id mybatchpool \
+    --query "allocationState"
+
+// Create a job
+   az batch job create \
+    --id mybatchjob --pool-id mybatchpool
+    
+// Create parallel tasks (1 to 5)
+   for i in {1..5}
+   do
+     az batch task create \
+       --task-id mybatchtask$i --job-id mybatchjob \
+       --command-line "/bin/bash -c 'printenv | grep AZ_BATCH; sleep 90s'"
+   done
+   
+.....
