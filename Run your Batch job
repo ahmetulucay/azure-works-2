@@ -20,12 +20,12 @@
     
 // Create a sample pool of Linux compute noods
    az batch pool create \
-    --id mypool --vm-size Standard_A1_v2 --target-dedicated-nodes 2 \
+    --id mybatchpool --vm-size Standard_A1_v2 --target-dedicated-nodes 2 \
     --image canonical:ubuntuserver:20.04-LTS --node-agent-sku-id "batch.node.ubuntu 20.04"
     
 // See the status of the pool
-   az batch pool show --pool-id mybatchpool \
-    --query "allocationState"
+   az batch pool show \
+    --pool-id mybatchpool --query "allocationState"
 
 // Create a job
    az batch job create \
