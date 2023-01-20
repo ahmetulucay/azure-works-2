@@ -1,0 +1,14 @@
+[Azure CLI]
+
+// View task status
+   az batch task show \
+    --job-id mybatchjob --task-id mybatchtask1
+
+// View task output
+   az batch task file list \
+    --job-id mybatchjob --task-id mybacthtask1 --output table
+
+// Download (one) output file to a local directory
+   az batch task file download \
+    --job-id mybacthjob --task-id mybatchtask1 \
+    --file-path stdout.txt --destination ./stdout.txt
