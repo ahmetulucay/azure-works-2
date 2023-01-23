@@ -1,0 +1,85 @@
+
+#PREREQUISITES
+1.An Azure account with an active subscription. (use https://azure.microsoft.com/)
+2.A Batch account and a linked Azure Storage account (use https://portal.azure.com)
+
+#SIGN IN TO AZURE ACCOUNT
+1.Use https://portal.azure.com
+
+#GET A BATCH ACCOUNT CREDENTIALS
+(provide credentials for your Batch and Storage accounts)
+1.Select All services AND THEN Batch accounts, and THEN create the "name" of your Batch account.
+2.Select Keys to see the Batch credentials.
+3.Copy the values to a text editor. (value of Batch account, URL, and Primary access key)
+4.Select Storage account to see the Storage account name and keys.
+5.Copy the values to a text editor. (value of Storage account name and Key1)
+
+#DOWNLOAD THE SAMPLE
+1.Use the following command to clone the sample app=
+  - git clone https://github.com/Azure-Samples/batch-dotnet-quickstart.git
+2.Navigate to the directory in Visual Studio(VS)=
+  - BatchDotNetQuickstart.sln
+3.Update the credential strings in Program.cs in VS=
+  - Batch account credentials:
+private const string BatchAccountName = "mybatchaccount";
+private const string BatchAccountKey  = "xxxxxxxxxxxxxxxxE+yXrRvJAqT9BlXwwo1CwF+SwAYOxxxxxxxxxxxxxxxx43pXi/gdiATkvbpLRl3x14pcEQ==";
+private const string BatchAccountUrl  = "https://mybatchaccount.mybatchregion.batch.azure.com";
+
+  - Storage account credentials:
+private const string StorageAccountName = "mystorageaccount";
+private const string StorageAccountKey  = "xxxxxxxxxxxxxxxxy4/xxxxxxxxxxxxxxxxfwpbIC5aAWA8wDu+AFXZB827Mt9lybZB1nUcQbQiUrkPtilK5BQ==";
+
+#BUILD AND RUN THE APP
+1.See the Batch workflow in action, build and run the application in VS=
+  Or run from command line using commands below in sequence=
+  - dotnet build
+  - dotnet run
+
+
+#CREATE A POOL OF COMPUTE NODES
+1.private static VirtualMachineConfiguration CreateVirtualMachineConfiguration(ImageReference imageReference)
+{
+    return new VirtualMachineConfiguration(imageReference: imageReference,
+           nodeAgentSkuId: "batch.node.windows amd64");
+}
+
+private static ImageReference CreateImageReference()
+{
+    return new ImageReference(
+        publisher: "MicrosoftWindowsServer", offer: "WindowsServer",
+        sku: "2016-datacenter-smalldisk", version: "latest");
+}
+
+private static void CreateBatchPool(BatchClient batchClient, VirtualMachineConfiguration vmConfiguration)
+{
+    try
+    {
+        CloudPool pool = batchClient.PoolOperations.CreatePool(
+            poolId: PoolId, targetDedicatedComputeNodes: PoolNodeCount,
+            virtualMachineSize: PoolVMSize, virtualMachineConfiguration: vmConfiguration);
+        pool.Commit();
+    }
+}
+
+#CREATE A BATCH JOB
+1.try
+{
+    CloudJob job = batchClient.JobOperations.CreateJob();
+    job.Id = JobBatchId;
+    job.PoolInformation = new PoolInformation { PoolId = PoolBatchId };
+    job.Commit();
+}
+
+#CREATE TASKS
+1.for (int i = 0; i < inputFiles.Count; i++)
+{
+    string taskBatchId = String.Format("Task{0}", i);
+    string inputTaskFilename = inputFiles[i].FilePath;
+    string taskCommandLine = String.Format("cmd /c type {0}", inputTaskFilename);
+
+    CloudTask task = new CloudTask(taskBatchId, taskCommandLine);
+    task.ResourceFiles = new List<ResourceFile> { inputFiles[i] };
+    tasks.Add(task);
+}
+batchClient.JobOperations.AddTask(JobId, tasks);
+
