@@ -1,0 +1,35 @@
+[C#]
+
+namespace CosmosTableSamples.Model
+{
+   using Microsoft.Azure.Cosomos.Table;
+   public class qualaEntity : TableEntity
+   {
+      public qualaEntity()
+      {
+      }
+      
+      public qualaEntity(int id, string name, string email)
+      {
+         PartitionKey = id;
+         RowKey = name;
+         Email = email;
+      }
+      
+      public string qualaCourse {get; set;}
+      public string qualaProgress {get; set;}
+   }
+}
+
+CloudTableClient qualaTableClient = qualaaccount.CreateCloudTableClient();
+CloudTable qualatable = qualaTableClient.GetTableReference("qualaCustomer");
+
+TableQuery<QualaEntity> query = new TableQuery<QualaEntity>()
+   .Where(TableQuery.combineFilters(
+        TableQuery.GenerateFilterCondition(PartitionKey, QueryComparisons.Equal, "1"),
+        TableOperators.And,
+        TableQuery.GenerateFilterCondition(Email, QueryComparisons.Equal, "jacksimpson@gmail.com")
+   ));
+
+await table.ExecuteQuerySegmentedAsync<CustomerEntity>(query, null);
+
