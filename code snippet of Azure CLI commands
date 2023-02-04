@@ -1,0 +1,26 @@
+[Azure CLI]
+
+az storage account update \
+   --name chiplabstore2023 \
+   --resource-group chiplab-rg \
+   --assign-identity
+
+az keyvault create \
+   --name chiplabvault \
+   --resource-group chiplab-rg \
+   --location WestUS \
+   --enable-soft-delete \
+   --enable-purge-protection
+   
+storage_account_principal=$(az storage accoun show \
+   --name chiplabstore2023 \
+   --resource-group chiplab-rg \
+   --query identity.principalId \
+   --output tsv)
+   
+az keyvault set-policy \
+   --name chiplabvault \
+   --resource-group chiplab-rg \
+   --object-id $storage_account_principal \
+   --key-permissions get recover unwrapKey wrapKey
+  
