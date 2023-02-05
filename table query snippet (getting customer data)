@@ -2,29 +2,27 @@
 
 namespace CosmosTableSamples.Model
 {
-   using Microsoft.Azure.Cosomos.Table;
-   public class qualaEntity : TableEntity
+   using Microsoft.Azure.Cosmos.Table;
+   public class chipEntity : TableEntity
    {
-      public qualaEntity()
-      {
-      }
+      public chipEntity(){}
       
-      public qualaEntity(int id, string name, string email)
+      public chipEntity(int id, string name, string email)
       {
          PartitionKey = id;
          RowKey = name;
          Email = email;
       }
       
-      public string qualaCourse {get; set;}
-      public string qualaProgress {get; set;}
+      public string chipCourse {get; set;}
+      public string chipProgress {get; set;}
    }
 }
 
-CloudTableClient qualaTableClient = qualaaccount.CreateCloudTableClient();
-CloudTable qualatable = qualaTableClient.GetTableReference("qualaCustomer");
+CloudTableClient chipTableClient = chipaccount.CreateCloudTableClient();
+CloudTable chiptable = chipTableClient.GetTableReference("chipCustomer");
 
-TableQuery<QualaEntity> query = new TableQuery<QualaEntity>()
+TableQuery<ChipEntity> query = new TableQuery<ChipEntity>()
    .Where(TableQuery.combineFilters(
         TableQuery.GenerateFilterCondition(PartitionKey, QueryComparisons.Equal, "1"),
         TableOperators.And,
@@ -32,4 +30,3 @@ TableQuery<QualaEntity> query = new TableQuery<QualaEntity>()
    ));
 
 await table.ExecuteQuerySegmentedAsync<CustomerEntity>(query, null);
-
