@@ -1,0 +1,20 @@
+
+var storAccount = CloudStorageAccount.Parse(connectionString);
+var blobClient = storAccount.CreateCloudBlobClient();
+
+//source container
+var sourceContainerName = "source";
+var sourceFilePathName = "sourceFolder/fileName";
+
+//target container
+var targetContainerName = "target";
+var targetFilePathName = "targetFolder/fileName";
+
+//source and target container references
+var sourceContainer = blobClient.GetContainerReference(sourceContainerName);
+var targetContainer = blobClient.GetContainerReference(targetContainerName);
+
+//source and target blob references
+CloudBlockBlob sourceBlob = sourcecontainer.GetBlockReference(sourceFilePath);
+CloudBlockBlob sourceBlob = targetcontainer.GetBlockReference(targetFilePath);
+
