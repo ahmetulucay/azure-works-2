@@ -1,0 +1,9 @@
+[Azure CLI]
+
+az group create -l westus -n MyResourceGroup
+az appservice plan create -g MyResourceGroup -n MyPlan
+az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName
+az webapp deployment source config \
+   --branch master --manual-integration --name MyWebApp \
+   --repo-url https://github.com/Azure-Samples/function-image-upload-resize \
+   --resource-group MyResourceGroup
